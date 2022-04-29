@@ -71,7 +71,6 @@ public class UserDaoJDBCImpl implements UserDao {
             throw new RuntimeException();
         } /*finally {
             conn.close();
-            System.out.println("Закрытие в поле сейв " + conn.isClosed());
         }*/
     }
 
@@ -85,7 +84,6 @@ public class UserDaoJDBCImpl implements UserDao {
             throw new RuntimeException();
         } /*finally {
             conn.close();
-            System.out.println("Закрытие в поле удалить пользователя " + conn.isClosed());
         }*/
     }
 

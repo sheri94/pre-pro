@@ -16,7 +16,7 @@ public class Util {
          try {
              connection = DriverManager
                      .getConnection(url, user, pass);
-             System.out.println("Нормально");
+          //   System.out.println("Нормально");
          } catch (SQLException e) {
              throw new RuntimeException();
          }

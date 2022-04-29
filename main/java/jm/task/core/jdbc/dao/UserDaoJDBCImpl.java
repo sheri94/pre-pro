@@ -18,7 +18,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public void createUsersTable() throws SQLException {
+    public void createUsersTable()  {
         final String CREATE =
                 "CREATE TABLE IF NOT EXISTS `user` (\n" +
                         "  `id` int NOT NULL AUTO_INCREMENT,\n" +
@@ -30,8 +30,8 @@ public class UserDaoJDBCImpl implements UserDao {
                         ");";
         try {
             stm = conn.prepareStatement(CREATE);
-            stm.execute();
-            System.out.println("Открытие в поле криет " + conn.isClosed());
+            stm.executeUpdate();
+            // System.out.println("Открытие в поле криет " + conn.isClosed());
         } catch (SQLException e) {
             throw new RuntimeException();
         }/*finally {
@@ -40,19 +40,19 @@ public class UserDaoJDBCImpl implements UserDao {
         }*/
     }
 
-    public void dropUsersTable() throws SQLException {
+    public void dropUsersTable()  {
         final String DROP =
                 "DROP TABLE IF EXISTS user;";
         try {
             stm = conn.prepareStatement(DROP);
             stm.executeUpdate();
-            System.out.println("Открытие в поле дроп " + conn.isClosed());
+          //  System.out.println("Открытие в поле дроп " + conn.isClosed());
         } catch (SQLException e) {
             throw new RuntimeException();
-        } finally {
+        } /*finally {
             conn.close();
-            System.out.println("Закрытие в поле дроп " + conn.isClosed());
-        }
+          //  System.out.println("Закрытие в поле дроп " + conn.isClosed());
+        }*/
     }
 
     public void saveUser(String name, String lastName, byte age) throws SQLException {
@@ -75,7 +75,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }*/
     }
 
-    public void removeUserById(long id) throws SQLException {
+    public void removeUserById(long id)  {
         final String REMOVE = "DELETE FROM user WHERE id = ?;";
         try {
             stm = conn.prepareStatement(REMOVE);
@@ -89,7 +89,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }*/
     }
 
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> getAllUsers()  {
         List<User> users = new ArrayList<>();
         final String GETALLUSERS = "SELECT id, name, lastName, age FROM user;";
         Statement statement = null;
@@ -117,12 +117,12 @@ public class UserDaoJDBCImpl implements UserDao {
         return users;
     }
 
-    public void cleanUsersTable() throws SQLException {
+    public void cleanUsersTable() {
         final String DELETE = "TRUNCATE TABLE user;";
         try {
             stm = conn.prepareStatement(DELETE);
             stm.executeUpdate();
-            System.out.println("Открытие в поле криет " + conn.isClosed());
+          //  System.out.println("Открытие в поле криет " + conn.isClosed());
         } catch (SQLException e) {
             throw new RuntimeException();
         }/*finally {

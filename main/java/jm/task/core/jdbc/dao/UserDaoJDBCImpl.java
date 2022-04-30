@@ -10,15 +10,15 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
     Util util = new Util();
-    Connection conn = util.getConnection();
-    PreparedStatement stm = null;
-
+    PreparedStatement pstm = null;
+    Statement stm = null;
+    Connection conn = null;
 
     public UserDaoJDBCImpl() {
 
     }
 
-    public void createUsersTable()  {
+    public void createUsersTable() {
         final String CREATE =
                 "CREATE TABLE IF NOT EXISTS `user` (\n" +
                         "  `id` int NOT NULL AUTO_INCREMENT,\n" +
@@ -28,105 +28,91 @@ public class UserDaoJDBCImpl implements UserDao {
                         "  PRIMARY KEY (`id`),\n" +
                         "  UNIQUE KEY `id_UNIQUE` (`id`)\n" +
                         ");";
-        try {
-            stm = conn.prepareStatement(CREATE);
-            stm.executeUpdate();
-            // System.out.println("Открытие в поле криет " + conn.isClosed());
+
+        try (Connection conn = util.getConnection()) {
+            stm = conn.createStatement();
+            stm.executeUpdate(CREATE);
+            conn.close();
+            stm.close();
         } catch (SQLException e) {
             throw new RuntimeException();
-        }/*finally {
-            conn.close();
-            System.out.println("Закрытие в поле криет " + conn.isClosed());
-        }*/
+        }
     }
 
-    public void dropUsersTable()  {
-        final String DROP =
-                "DROP TABLE IF EXISTS user;";
-        try {
-            stm = conn.prepareStatement(DROP);
-            stm.executeUpdate();
-          //  System.out.println("Открытие в поле дроп " + conn.isClosed());
+    public void dropUsersTable() {
+        final String DROP = "DROP TABLE IF EXISTS user;";
+        try (Connection conn = util.getConnection()) {
+            stm = conn.createStatement();
+            stm.executeUpdate(DROP);
+            conn.close();
+            stm.close();
         } catch (SQLException e) {
             throw new RuntimeException();
-        } /*finally {
-            conn.close();
-          //  System.out.println("Закрытие в поле дроп " + conn.isClosed());
-        }*/
+        }
     }
 
-    public void saveUser(String name, String lastName, byte age) throws SQLException {
+    public void saveUser(String name, String lastName, byte age) {
+        final String SAVEUSER = "insert into user(name, lastName, age) values (?, ?, ?)";
 
-
-        final String SAVEUSER =
-                "insert into user(name, lastName, age) values (?, ?, ?)";
-
-        try {
-            stm = conn.prepareStatement(SAVEUSER);
-            stm.setString(1, name);
-            stm.setString(2, lastName);
-            stm.setInt(3, age);
-            stm.executeUpdate();
+        try (Connection conn = util.getConnection()) {
+            pstm = conn.prepareStatement(SAVEUSER);
+            pstm.setString(1, name);
+            pstm.setString(2, lastName);
+            pstm.setInt(3, age);
+            pstm.execute();
+            conn.close();
+            pstm.close();
         } catch (SQLException e) {
             throw new RuntimeException();
-        } /*finally {
-            conn.close();
-        }*/
+        }
     }
 
-    public void removeUserById(long id)  {
+    public void removeUserById(long id) {
         final String REMOVE = "DELETE FROM user WHERE id = ?;";
-        try {
-            stm = conn.prepareStatement(REMOVE);
-            stm.setLong(1, id);
-            stm.executeUpdate();
+        try (Connection conn = util.getConnection()) {
+            pstm = conn.prepareStatement(REMOVE);
+            pstm.setLong(1, id);
+            pstm.executeUpdate();
+            conn.close();
+            pstm.close();
         } catch (SQLException e) {
             throw new RuntimeException();
-        } /*finally {
-            conn.close();
-        }*/
+        }
     }
 
-    public List<User> getAllUsers()  {
+    public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         final String GETALLUSERS = "SELECT id, name, lastName, age FROM user;";
-        Statement statement = null;
 
-        try {
-            statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(GETALLUSERS);
+        try (Connection conn = util.getConnection()) {
+            stm = conn.createStatement();
+            ResultSet resultSet = stm.executeQuery(GETALLUSERS);
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getLong("id"));
                 user.setName(resultSet.getString("name"));
                 user.setLastName(resultSet.getString("lastName"));
                 user.setAge((byte) resultSet.getInt("age"));
-
                 users.add(user);
-
             }
             System.out.print(users);
+            conn.close();
+            stm.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } /*finally {
-            conn.close();
-            System.out.println("Закрытие в поле вывод всех пользователей " + conn.isClosed());
-        }*/
+        }
         return users;
     }
 
     public void cleanUsersTable() {
         final String DELETE = "TRUNCATE TABLE user;";
-        try {
-            stm = conn.prepareStatement(DELETE);
-            stm.executeUpdate();
-          //  System.out.println("Открытие в поле криет " + conn.isClosed());
+        try (Connection conn = util.getConnection()) {
+            stm = conn.createStatement();
+            stm.executeUpdate(DELETE);
+            conn.close();
+            stm.close();
         } catch (SQLException e) {
             throw new RuntimeException();
-        }/*finally {
-            conn.close();
-            System.out.println("Закрытие в поле клин " + conn.isClosed());
-        }*/
-
+        }
     }
 }

@@ -9,7 +9,6 @@ public class Util {
     private String pass = "1234";
     private String url = "jdbc:mysql://localhost:3306/test";
     private Connection connection;
-    //Class.forName("com.mysql.cj.jdbc.Driver");
 
 
      public  Connection getConnection() {

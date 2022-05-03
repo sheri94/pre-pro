@@ -12,11 +12,12 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
 
+
         UserService userServiceImpl = new UserServiceImpl();
 
         userServiceImpl.createUsersTable();
 
-        userServiceImpl.saveUser("Andrey", "Volsky", (byte) 28);
+       /* userServiceImpl.saveUser("Andrey", "Volsky", (byte) 28);
         userServiceImpl.saveUser("Katya", "Volk", (byte) 23);
         userServiceImpl.saveUser("Macha", "Kun", (byte) 34);
         userServiceImpl.saveUser("Tolua", "Bel", (byte) 29);
@@ -27,8 +28,7 @@ public class Main {
 
         userServiceImpl.cleanUsersTable();
 
-        userServiceImpl.dropUsersTable();
-
+        userServiceImpl.dropUsersTable();*/
 
     }
 }

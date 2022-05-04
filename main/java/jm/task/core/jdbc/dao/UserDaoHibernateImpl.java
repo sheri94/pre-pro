@@ -122,9 +122,9 @@ public class UserDaoHibernateImpl implements UserDao {
         } finally {
             session.close();
         }
-for( User user : users){
-    System.out.println(user);
-}
+        for (User user : users) {
+            System.out.println(user);
+        }
 
         return users;
     }
@@ -136,7 +136,7 @@ for( User user : users){
             session.beginTransaction();
 
             String hql = "DELETE from User";
-            session.createQuery(hql);
+            session.createQuery(hql).executeUpdate();
 
             session.getTransaction().commit();
         } catch (Exception e) {

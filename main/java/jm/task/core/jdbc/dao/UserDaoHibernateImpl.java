@@ -14,29 +14,32 @@ import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
     Util util = new Util();
-    SessionFactory sessionFactory = util.getSessionFactory();
-    Session session = null;
+    /*SessionFactory sessionFactory = util.getSessionFactory();
+    Session session = null;*/
 
     public UserDaoHibernateImpl() {
     }
 
-
     @Override
     public void createUsersTable() {
+        SessionFactory sessionFactory = util.getSessionFactory();
+        Session session = null;
         session = sessionFactory.openSession();
       try {
           session.beginTransaction();
 
-          String sql = "CREATE TABLE IF NOT EXISTS user " +
-                  "(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
-                  "name VARCHAR(50) NOT NULL, lastName VARCHAR(50) NOT NULL, " +
-                  "age TINYINT NOT NULL);";
+          String sql = "CREATE TABLE IF NOT EXISTS `user` (\n" +
+                  "  `id` int NOT NULL AUTO_INCREMENT,\n" +
+                  "  `name` varchar(45) NOT NULL,\n" +
+                  "  `lastName` varchar(45) NOT NULL,\n" +
+                  "  `age` int DEFAULT NULL,\n" +
+                  "  PRIMARY KEY (`id`),\n" +
+                  "  UNIQUE KEY `id_UNIQUE` (`id`)\n" +
+                  ");";
 
           Query query = session.createSQLQuery(sql).addEntity(User.class);
-
-
-
-
+          query.executeUpdate();
+          System.out.println(query);
           session.getTransaction().commit();
       }catch (Exception e){
           session.getTransaction().rollback();

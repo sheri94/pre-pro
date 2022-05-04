@@ -26,9 +26,9 @@ public class Main {
 
         userServiceImpl.removeUserById(3);
 
-        userServiceImpl.cleanUsersTable();
+        userServiceImpl.cleanUsersTable();*/
 
-        userServiceImpl.dropUsersTable();*/
+     //   userServiceImpl.dropUsersTable();
 
     }
 }

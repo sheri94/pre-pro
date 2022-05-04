@@ -1,12 +1,13 @@
 package jm.task.core.jdbc.dao;
 
-import com.mysql.cj.Query;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
+import org.hibernate.query.Query;
 
 import javax.security.auth.login.Configuration;
 import java.util.List;
@@ -22,25 +23,27 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void createUsersTable() {
+        session = sessionFactory.openSession();
       try {
-          session = sessionFactory.getCurrentSession();
-          Transaction transaction = session.beginTransaction();
-          String sql = "CREATE TABLE IF NOT EXISTS `user` (\n" +
-                  "  `id` int NOT NULL AUTO_INCREMENT,\n" +
-                  "  `name` varchar(45) NOT NULL,\n" +
-                  "  `lastName` varchar(45) NOT NULL,\n" +
-                  "  `age` int DEFAULT NULL,\n" +
-                  "  PRIMARY KEY (`id`),\n" +
-                  "  UNIQUE KEY `id_UNIQUE` (`id`)\n" +
-                  ");";
-          Query query = (Query) session.createSQLQuery(sql).addEntity(User.class);
+          session.beginTransaction();
 
-          transaction.commit();
-          session.close();
+          String sql = "CREATE TABLE IF NOT EXISTS user " +
+                  "(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+                  "name VARCHAR(50) NOT NULL, lastName VARCHAR(50) NOT NULL, " +
+                  "age TINYINT NOT NULL);";
+
+          Query query = session.createSQLQuery(sql).addEntity(User.class);
 
 
+
+
+          session.getTransaction().commit();
       }catch (Exception e){
+          session.getTransaction().rollback();
           e.printStackTrace();
+      }finally {
+          session.close();
+          sessionFactory.close();
       }
     }
 

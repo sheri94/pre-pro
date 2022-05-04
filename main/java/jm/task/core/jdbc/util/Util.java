@@ -41,7 +41,7 @@ public class Util {
                 Configuration configuration = new Configuration();
                 Properties properties = new Properties();
                 properties.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
-                properties.put(Environment.URL, "jdbc:mysql://localhost:3306");
+                properties.put(Environment.URL, "jdbc:mysql://localhost:3306/test?autoReconnect=true&useSSL=false");
                 properties.put(Environment.USER, "root");
                 properties.put(Environment.PASS, "1234");
                 properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
@@ -53,8 +53,7 @@ public class Util {
                 configuration.addAnnotatedClass(User.class);
 
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
-                        .applySettings(configuration
-                                .getProperties());
+                        .applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
                 System.out.println("good");
             } catch (Exception e) {

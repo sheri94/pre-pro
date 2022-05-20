@@ -1,14 +1,14 @@
-package service;
+package web.service;
 
-import models.Car;
+import web.models.Car;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-
+@Component
 public class CarServiceImpl implements CarService {
-    List<Car> cars = new ArrayList<>();
+    private List<Car> cars = new ArrayList<>();
 
     {
         Car car1 = new Car("Audi", "a6", 777);

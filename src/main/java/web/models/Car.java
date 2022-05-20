@@ -1,7 +1,5 @@
-package models;
+package web.models;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Car {
     private String model;

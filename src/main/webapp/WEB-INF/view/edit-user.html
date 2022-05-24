@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title>Create user</title>
+</head>
+<body>
+<!--<form th:method="PATCH" action="edit-user" th:object="${user}">-->
+<form th:method="PATCH" th:action="@{/edit-user/{id}(id=${user.getId()})}" th:object="${user}">
+    <hidden type="text" th:field="*{id}" th:id="id"></hidden>
+    Name<br><input type="text" th:field="*{name}" name="name" placeholder="Enter please name" required/><br>
+    Surname<br><input type="text" th:field="*{surname}" name="surname" placeholder="Enter please surname" required/><br>
+    Age<br><input type="number" th:field="*{age}" name="age" placeholder="Enter please age" required/>
+    <p><input type="submit" value="Save">
+</form>
+</body>
+</html>

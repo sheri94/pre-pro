@@ -4,16 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
 import ru.avolsky.kata.crud.model.User;
 import ru.avolsky.kata.crud.service.UserService;
-
-import javax.servlet.ServletException;
 
 
 @Controller
 public class UserController {
-
 
     private final UserService service;
 
@@ -36,7 +32,7 @@ public class UserController {
         return "add-user";
     }
 
-    @GetMapping("/saveUser")
+    @PostMapping
     public String saveUser(@ModelAttribute("user") User user) {
         service.saveUser(user);
         return "redirect:/";
@@ -61,4 +57,3 @@ public class UserController {
         return "redirect:/";
     }
 }
-

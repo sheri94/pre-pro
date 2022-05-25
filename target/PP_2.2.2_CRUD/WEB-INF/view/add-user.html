@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add User</title>
 </head>
 <body>
-<form action="saveUser">
+<form th:method="POST" th:action="@{/}" th:object="${user}">
     Name<br><input type="text" name="name" placeholder="Enter please name" required/><br>
     Surname<br><input type="text" name="surname" placeholder="Enter please surname" required/><br>
     Age<br><input type="number" name="age" placeholder="Enter please age" required/><br>

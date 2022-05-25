@@ -28,7 +28,6 @@ import java.util.Properties;
 @EnableWebMvc
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
-//@ComponentScan("ru.avolsky.kata.crud.model")
 @ComponentScan("ru.avolsky.kata.crud")
 public class AppConfig implements WebMvcConfigurer {
 

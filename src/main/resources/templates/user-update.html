@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="UTF-8">
+<title>Create user</title>
+</head>
+<body>
+<form action="#" th:action="@{/user-update}" th:object="${user}" method="post">
+    Id<input readonly type="number" th:field="*{id}" id="id" placeholder="ID"><br>
+
+    Name<input type="text" th:field="*{name}" id="name" placeholder="Enter please name" required/><br>
+    Surname<input type="text" th:field="*{surname}" id="surname" placeholder="Enter please surname" required/><br>
+    Age<input type="number" th:field="*{age}" id="age" placeholder="Enter please age" required/>
+
+    <p><input type="submit" value="Save">
+</form>
+</body>
+</html>

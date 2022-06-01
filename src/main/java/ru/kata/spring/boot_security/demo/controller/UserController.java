@@ -38,7 +38,8 @@ public class UserController {
         return "redirect:/login";
     }
 
-
+// оказывается по заданию юзер не может редактировать и удалять свои данные, я это понял не сразу, методы не доделаны.
+    // методы уделания, работает, редактирование, нет.
     @GetMapping("/user/my-update/{id}")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
         User user = userService.findById(id);
@@ -48,7 +49,7 @@ public class UserController {
         return "user-update";
     }
 
-    @PostMapping("/user/my-update")
+    @PatchMapping("/user-update")
     public String updateUser(User user,
                              @RequestParam(value = "rolesId") String[] roles) {
      //   user.setRoles(roleService.getSetRoles(roles));

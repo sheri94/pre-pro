@@ -84,141 +84,253 @@
         </a>
     </nav>
 
-    <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Admin')" id="defaultOpen">Admin</button>
-        <a class="nav-link" href="/user/my">User</a>
-    </div>
+    <!--    <div class="tab">-->
+    <!--        <button class="tablinks" onclick="openCity(event, 'Admin')" id="defaultOpen">Admin</button>-->
+    <!--        <a class="nav-link" href="/user/my">User</a>-->
+    <!--    </div>-->
 
-    <div id="Admin" class="tabcontent">
+    <!--    <div id="Admin" class="tabcontent">-->
 
-        <!--Админ панель навигация-->
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#users"
-               role="tab" aria-controls="users" aria-selected="true">Users table</a>
-            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#create"
-               role="tab" aria-controls="create" aria-selected="false">New user</a>
-        </div>
-        <!--Админ панель навигация-->
-        <!--        Вывод всех пользователей-->
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="users" role="tabpanel"
-                 aria-labelledby="users-tab">
-                <div class="d-grid gap-5">
-                    <div class="p-2 bg-grey border rounded-top">
-                        <h5 class="text-left">All users</h5>
-                    </div>
+    <!--        &lt;!&ndash;Админ панель навигация&ndash;&gt;-->
+    <!--        <div class="nav nav-tabs" id="nav-tab" role="tablist">-->
+    <!--            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#users"-->
+    <!--               role="tab" aria-controls="users" aria-selected="true">Users table</a>-->
+    <!--            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#create"-->
+    <!--               role="tab" aria-controls="create" aria-selected="false">New user</a>-->
+    <!--        </div>-->
+    <!--        &lt;!&ndash;Админ панель навигация&ndash;&gt;-->
+    <!--        &lt;!&ndash;        Вывод всех пользователей&ndash;&gt;-->
+    <!--        <div class="tab-content">-->
+    <!--            <div class="tab-pane fade show active" id="users" role="tabpanel"-->
+    <!--                 aria-labelledby="users-tab">-->
+    <!--                <div class="d-grid gap-5">-->
+    <!--                    <div class="p-2 bg-grey border rounded-top">-->
+    <!--                        <h5 class="text-left">All users</h5>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                &lt;!&ndash;        Вывод всех пользователей&ndash;&gt;-->
+    <!--                <table class="table table-striped">-->
+
+    <!--                    <tr>-->
+    <!--                        <th>Id</th>-->
+    <!--                        <th>Name</th>-->
+    <!--                        <th>Surname</th>-->
+    <!--                        <th>Age</th>-->
+    <!--                        <th>Email</th>-->
+    <!--                        <th>Edit</th>-->
+    <!--                        <th>Delete</th>-->
+    <!--                    </tr>-->
+    <!--                    <tr th:each="user: ${users}">-->
+    <!--                        <td th:utext="${user.id}">Id</td>-->
+    <!--                        <td th:utext="${user.name}">Name</td>-->
+    <!--                        <td th:utext="${user.surname}">Surname</td>-->
+    <!--                        <td th:utext="${user.age}">Age</td>-->
+    <!--                        <td th:utext="${user.email}">Email</td>-->
+    <!--                        <td><a class="btn btn-primary" th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>-->
+    <!--                        <td><a class="btn btn-danger" th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>-->
+    <!--                    </tr>-->
+    <!--                </table>-->
+    <!--                &lt;!&ndash;                Создание нового пользователя&ndash;&gt;-->
+    <!--                <div class="tab-pane" id="create" role="tabpanel">-->
+    <!--                    <div class="d-grid gap-5">-->
+    <!--                        <div class="p-2 bg-light border rounded-top">-->
+    <!--                            <h5 class="text-left">New user</h5>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                    <div class="d-grid gap-1">-->
+    <!--                        <div class="p-2 bg-white border rounded-bottom">-->
+    <!--                            <div class="row">-->
+    <!--                                <div class="col-4"></div>-->
+    <!--                                <div class="col-4">-->
+    <!--                                    <form th:method="POST" th:action="@{/user-create}" th:object="${user}">-->
+    <!--                                        Name<br><input type="text" name="name" placeholder="Enter please name"-->
+    <!--                                                       required/><br>-->
+    <!--                                        Surname<br><input type="text" name="surname" placeholder="Enter please surname"-->
+    <!--                                                          required/><br>-->
+
+    <!--                                        Email<br><input type="text" name="email" placeholder="Enter please email"-->
+    <!--                                                        required/><br>-->
+    <!--                                        Password<br><input type="text" name="password"-->
+    <!--                                                           placeholder="Enter please password" required/><br>-->
+
+    <!--                                        Age<br><input type="number" name="age" placeholder="Enter please age" required/><br>-->
+
+    <!--                                        <p>-->
+    <!--                                            <label>-->
+    <!--                                                <select size="3" multiple="multiple" name="rolesId" id="roles">-->
+    <!--                                                    <option disabled>Roles:</option>-->
+    <!--                                                    <option value="ROLE_ADMIN">ADMIN</option>-->
+    <!--                                                    <option selected value="ROLE_USER">USER</option>-->
+    <!--                                                </select>-->
+    <!--                                            </label>-->
+    <!--                                        </p>-->
+
+    <!--                                        <p><input type="submit" value="Save">-->
+    <!--                                    </form>-->
+    <!--                                </div>-->
+    <!--                                <div class="col-4"></div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
+    <!--                Создание нового пользователя-->
+
+
+    <!--    новый ход-->
+
+
+    <div class="container-fluid d-flex flex-column">
+        <div class="row" style="height:100vh;">
+            <div class="col-2 mt-3 pl-0 pr-0  bg-white">
+                <nav class="nav flex-column nav-pills">
+                    <a class="nav-link active" href="/admin/users">Admin</a>
+                    <a class="nav-link" href="/user/my">User</a>
+                </nav>
+            </div>
+            <!-- Admin panel -->
+            <div class="col-md-10 mt-3 pl-3 pr-3">
+                <h1 class="text-left">
+                    Admin panel
+                </h1>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#users"
+                       role="tab" aria-controls="users" aria-selected="true">Users table</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#create"
+                       role="tab" aria-controls="create" aria-selected="false">New user</a>
                 </div>
-                <!--        Вывод всех пользователей-->
-                <table class="table table-striped">
-
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Age</th>
-                        <th>Email</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    <tr th:each="user: ${users}">
-                        <td th:utext="${user.id}">Id</td>
-                        <td th:utext="${user.name}">Name</td>
-                        <td th:utext="${user.surname}">Surname</td>
-                        <td th:utext="${user.age}">Age</td>
-                        <td th:utext="${user.email}">Email</td>
-                        <td><a class="btn btn-primary" th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
-                        <td><a class="btn btn-danger" th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
-                    </tr>
-                </table>
-                <!--                Создание нового пользователя-->
-                <div class="tab-pane" id="create" role="tabpanel">
-                    <div class="d-grid gap-5">
-                        <div class="p-2 bg-light border rounded-top">
-                            <h5 class="text-left">New user</h5>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="users" role="tabpanel"
+                         aria-labelledby="users-tab">
+                        <div class="d-grid gap-5">
+                            <div class="p-2 bg-grey border rounded-top">
+                                <h5 class="text-left">All users</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="d-grid gap-1">
-                        <div class="p-2 bg-white border rounded-bottom">
-                            <div class="row">
-                                <div class="col-4"></div>
-                                <div class="col-4">
-                                    <form th:method="POST" th:action="@{/user-create}" th:object="${user}">
-                                        Name<br><input type="text" name="name" placeholder="Enter please name"
-                                                       required/><br>
-                                        Surname<br><input type="text" name="surname" placeholder="Enter please surname"
-                                                          required/><br>
-
-                                        Email<br><input type="text" name="email" placeholder="Enter please email"
-                                                        required/><br>
-                                        Password<br><input type="text" name="password"
-                                                           placeholder="Enter please password" required/><br>
-
-                                        Age<br><input type="number" name="age" placeholder="Enter please age" required/><br>
-
-                                        <p>
-                                            <label>
-                                                <select size="3" multiple="multiple" name="rolesId" id="roles">
-                                                    <option disabled>Roles:</option>
-                                                    <option value="ROLE_ADMIN">ADMIN</option>
-                                                    <option selected value="ROLE_USER">USER</option>
-                                                </select>
-                                            </label>
-                                        </p>
-
-                                        <p><input type="submit" value="Save">
-                                    </form>
-                                </div>
-                                <div class="col-4"></div>
+                        <div class="d-grid gap-1">
+                            <div class="p-2 bg-white border rounded-bottom">
+                                </br>
+                                <!-- Таблица -->
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>Age</th>
+                                        <th>Email</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    <tr th:each="user: ${users}">
+                                        <td th:utext="${user.id}">Id</td>
+                                        <td th:utext="${user.name}">Name</td>
+                                        <td th:utext="${user.surname}">Surname</td>
+                                        <td th:utext="${user.age}">Age</td>
+                                        <td th:utext="${user.email}">Email</td>
+                                        <td><a class="btn btn-primary"
+                                               th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
+                                        <td><a class="btn btn-danger" th:href="@{user-delete/{id}(id=${user.id})}">Delete</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- конец Таблицы -->
+                                </br>
                             </div>
                         </div>
                     </div>
+                    <!--Создание нового пользователя-->
+                    <div class="tab-pane" id="create" role="tabpanel">
+                        <div class="d-grid gap-5">
+                            <div class="p-2 bg-light border rounded-top">
+                                <h5 class="text-left">New user</h5>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-1">
+                            <div class="p-2 bg-white border rounded-bottom">
+                                <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="col-4">
+                                        <form th:method="POST" th:action="@{/user-create}" th:object="${user}">
+                                            Name<br><input type="text" name="name" placeholder="Enter please name"
+                                                           required/><br>
+                                            Surname<br><input type="text" name="surname"
+                                                              placeholder="Enter please surname"
+                                                              required/><br>
+
+                                            Email<br><input type="text" name="email" placeholder="Enter please email"
+                                                            required/><br>
+                                            Password<br><input type="text" name="password"
+                                                               placeholder="Enter please password" required/><br>
+
+                                            Age<br><input type="number" name="age" placeholder="Enter please age"
+                                                          required/><br>
+                                            <p>
+                                                <label>
+                                                    <select size="3" multiple="multiple" name="rolesId" id="roles">
+                                                        <option disabled>Roles:</option>
+                                                        <option value="ROLE_ADMIN">ADMIN</option>
+                                                        <option selected value="ROLE_USER">USER</option>
+                                                    </select>
+                                                </label>
+                                            </p>
+
+                                            <p><input type="submit" value="Save">
+                                        </form>
+                                    </div>
+                                    <div class="col-4"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- конец Создание нового пользователя-->
                 </div>
             </div>
+
+            <!--    новый ход-->
+
+            <br>
+            <input type="button" th:value="add"
+                   onclick="window.location.href ='user-create'"/>
         </div>
+
+        <div id="User" class="tabcontent">
+
+        </div>
+
+
+        <script>
+            function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+
+            // Получите элемент с id="defaultOpen" и нажмите на него
+            document.getElementById("defaultOpen").click();
+        </script>
     </div>
-</div>
-<!--                Создание нового пользователя-->
+    <!--Настройки доп-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
 
-<br>
-<input type="button" th:value="add"
-       onclick="window.location.href ='user-create'"/>
-</div>
-
-<div id="User" class="tabcontent">
-
-</div>
-
-
-<script>
-    function openCity(evt, cityName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    // Получите элемент с id="defaultOpen" и нажмите на него
-    document.getElementById("defaultOpen").click();
-</script>
-</div>
-<!--Настройки доп-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-        crossorigin="anonymous"></script>
-
-<!-- Загрузить библиотеку иконок -->
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Загрузить библиотеку иконок -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </body>
 </html>
 

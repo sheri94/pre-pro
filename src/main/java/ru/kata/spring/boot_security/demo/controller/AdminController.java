@@ -32,7 +32,6 @@ public class AdminController {
     public String findAll(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         List<User> userList = userService.findAll();
         model.addAttribute("users", userList);
-
         model.addAttribute("email", userService.findByEmail(userDetails.getUsername()));
         model.addAttribute("newUser", new User());
         model.addAttribute("role", roleService.findAll());

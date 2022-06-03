@@ -221,6 +221,7 @@
                                         <th>Surname</th>
                                         <th>Age</th>
                                         <th>Email</th>
+                                        <th>Role</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -230,6 +231,11 @@
                                         <td th:utext="${user.surname}">Surname</td>
                                         <td th:utext="${user.age}">Age</td>
                                         <td th:utext="${user.email}">Email</td>
+
+                                        <td><a th:each="role : ${user.getRoles()}"
+                                               th:text="${role.getNameReplace()}+' '">Role</a></td>
+                                        <td>
+
                                         <td><a class="btn btn-primary"
                                                th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
                                         <td><a class="btn btn-danger" th:href="@{user-delete/{id}(id=${user.id})}">Delete</a>
@@ -245,7 +251,7 @@
                     <div class="tab-pane" id="create" role="tabpanel">
                         <div class="d-grid gap-5">
                             <div class="p-2 bg-light border rounded-top">
-                                <h5 class="text-left">New user</h5>
+                                <h5 class="text-left">Add new user</h5>
                             </div>
                         </div>
                         <div class="d-grid gap-1">
@@ -254,30 +260,45 @@
                                     <div class="col-4"></div>
                                     <div class="col-4">
                                         <form th:method="POST" th:action="@{/user-create}" th:object="${user}">
-                                            Name<br><input type="text" name="name" placeholder="Enter please name"
-                                                           required/><br>
-                                            Surname<br><input type="text" name="surname"
-                                                              placeholder="Enter please surname"
-                                                              required/><br>
+                                            <div class="form-group text-center">
+                                                <b>Name</b><br><input type="text" name="name"
+                                                                      placeholder="Enter please name"
+                                                                      class="form-control"
+                                                                      required/><br>
 
-                                            Email<br><input type="text" name="email" placeholder="Enter please email"
-                                                            required/><br>
-                                            Password<br><input type="text" name="password"
-                                                               placeholder="Enter please password" required/><br>
+                                                <b>Surname</b><br><input type="text" name="surname"
+                                                                         placeholder="Enter please surname"
+                                                                         class="form-control"
+                                                                         required/><br>
 
-                                            Age<br><input type="number" name="age" placeholder="Enter please age"
-                                                          required/><br>
-                                            <p>
-                                                <label>
-                                                    <select size="3" multiple="multiple" name="rolesId" id="roles">
-                                                        <option disabled>Roles:</option>
-                                                        <option value="ROLE_ADMIN">ADMIN</option>
-                                                        <option selected value="ROLE_USER">USER</option>
-                                                    </select>
-                                                </label>
-                                            </p>
+                                                <b>Age</b><br><input type="number" name="age"
+                                                                     placeholder="Enter please age"
+                                                                     class="form-control"
+                                                                     required/><br>
 
-                                            <p><input type="submit" value="Save">
+                                                <b>Email</b><br><input type="text" name="email"
+                                                                       placeholder="Enter please email"
+                                                                       class="form-control"
+                                                                       required/><br>
+
+                                                <b>Password</b>
+                                                <br><input type="text" name="password"
+                                                          placeholder="Enter please password"
+                                                          class="form-control"
+                                                          required/>
+
+                                            </div>
+                                            <div class="form-group text-center ">
+                                                <b>Roles:</b><br><select multiple class="form-control" size="2"
+                                                                         name="rolesId" id="roles">
+                                                <option value="ROLE_ADMIN">ADMIN</option>
+                                                <option selected value="ROLE_USER">USER</option>
+                                            </select>
+                                            </div>
+                                            <div class="col text-center">
+                                                <p><input class="btn btn-success btn-center" type="submit"
+                                                          value="Add new user">
+                                            </div>
                                         </form>
                                     </div>
                                     <div class="col-4"></div>
@@ -288,13 +309,9 @@
                     <!-- конец Создание нового пользователя-->
                 </div>
             </div>
-
-            <!--    новый ход-->
-
-            <br>
-            <input type="button" th:value="add"
-                   onclick="window.location.href ='user-create'"/>
         </div>
+        <!--    новый ход-->
+
 
         <div id="User" class="tabcontent">
 

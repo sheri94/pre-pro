@@ -9,5 +9,4 @@ public interface RoleService {
     List<Role> findAll();
      Set<Role> getSetRoles(String[] roleNames);
      Role getRoleByName(String name);
-   // void addRole(Role role);
 }
